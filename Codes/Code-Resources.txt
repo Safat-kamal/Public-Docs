@@ -1,0 +1,176 @@
+if(document.querySelector('.top-banner') && document.querySelector('.grid-width')){
+    const targetLink = document.querySelector('.top-banner__button a').getAttribute('href');
+    let DealsELement = document.createElement('li');
+    let anchor = document.createElement('a');
+    anchor.innerText='Deals';
+    anchor.setAttribute('href', targetLink);
+    anchor.setAttribute('id', 'deal-menu');
+    DealsELement.appendChild(anchor);
+
+    function DealsMenu(){
+        if(window.innerWidth > 980){
+            const node = document.querySelector('.main-nav');
+            node.insertBefore(DealsELement, node.children[7]);
+        }
+        else if(window.innerWidth <= 980){
+            const node = document.querySelector('.mobile-nav ul');
+            node.insertBefore(DealsELement, node.children[2]);
+        }
+    }
+    
+    window.addEventListener('load',function(){
+        DealsMenu();
+    });
+    
+    window.addEventListener('resize',function(){
+        DealsMenu();
+    });
+}
+------------------Task to SensiSeed - Deals menu (use this code to make optimized and using IIFE,waituntil)------------
+(function T10_Var1() {
+    function waitUntil(predicate, success, error) {
+        var int = setInterval(function () {
+            if (predicate()) {
+                clearInterval(int);
+                int = null;
+                success();
+            }
+        }, 33);
+        setTimeout(function () {
+            if (int !== null) {
+                clearInterval(int);
+                if (typeof error === 'function') {
+                    error();
+                }
+            }
+        }, 20000);
+    }
+
+    const config = {
+        selectors: {
+            bannerCTA: '.top-banner.top-banner_with-btn a',
+            navDesktop: '.main-nav ul li',
+            navMobile: '.mobile-nav ul li',
+        },
+        html: {
+            dealsMenu: function (link) {
+                return `<li><a href="${link}" id="deal-menu">Deals</a></li>`;
+            },
+        },
+    };
+
+    function dealsMenu() {
+        const nodeDesktop = document.querySelector('.main-nav li:last-child');
+        const nodeMobile = document.querySelectorAll(config.selectors.navMobile)[2];
+        const targetLink = document.querySelector(config.selectors.bannerCTA).getAttribute('href');
+
+        nodeDesktop.insertAdjacentHTML('beforebegin', config.html.dealsMenu(targetLink));
+        nodeMobile.insertAdjacentHTML('afterend', config.html.dealsMenu(targetLink));
+    }
+
+    waitUntil(
+        function () {
+            return (
+                document.querySelectorAll(config.selectors.bannerCTA).length > 0 &&
+                document.querySelectorAll(config.selectors.navDesktop).length > 0 &&
+                document.querySelectorAll(config.selectors.navMobile).length > 0
+            );
+        },
+        function () {
+            dealsMenu();
+        }
+    );
+})();
+
+
+
+
+
+
+
+
+---------------------------------Community Phone--------------------
+(function CP_93_Var1(){
+	function waitUntil(predicate, success, error) {
+        var int = setInterval(function () {
+            if (predicate()) {
+                clearInterval(int);
+                int = null;
+                success();
+            }
+        }, 33);
+        setTimeout(function () {
+            if (int !== null) {
+                clearInterval(int);
+                if (typeof error === 'function') {
+                    error();
+                }
+            }
+        }, 20000);
+    }
+    
+    const config = {
+        selectors: {
+            bannerHeading: '#header-section-title',
+            bannerFeatureContainer: '#s-feature',
+            bannerFeatureZipContainer: '#s-feature .container-1160 .zipcode_section',
+            USP: '.div-block-121 .tetx-conteiner-2',
+        },
+        html: {
+        	bannerDescription: function (){
+        		return `<div id="showCase_container"><pre>Never lose touch with your loved ones.\nGet home phone service that works without \ninternet, power, or copper cables, starting at \n$32/month.</pre><div id="showCase_banner"></div></div>`;
+        	},
+            NewUSP: function (input) {
+                return `<div class="text-row"><img src="https://assets-global.website-files.com/60c30ab447d78d3beb1f6c82/62bd93963b47d55b4df1c501_checkmark.svg" loading="lazy" height="24" width="24" alt=""><div class="user-portal-body">${input}</div></div>`;
+            },
+        },
+    };
+    
+    // setText Function
+    function setText(selector,inputText){
+		return (selector.innerText=inputText);
+	}
+	
+    //Banner showcase Container
+    function CP_93_Banner_ShowCase(){
+    	setText(document.querySelector(config.selectors.bannerHeading),'The most reliable way to keep your landline');
+	    const Main_Container = document.querySelector(config.selectors.bannerFeatureContainer);
+	    const landline_Container = Main_Container.children[1];
+	    const Zip_Container = document.querySelector(config.selectors.bannerFeatureZipContainer);
+	    Zip_Container.insertAdjacentHTML('beforebegin', config.html.bannerDescription());
+	    Main_Container.children[0].insertBefore(landline_Container,null);
+    }
+    
+    // USP Container
+	function CP_93_USP(){
+		document.querySelectorAll('.div-block-121 .tetx-conteiner-2').forEach((row,index)=>{
+			const currentRow = row.lastElementChild;
+			if(currentRow){
+				if(index == 0){
+					setText(currentRow.lastElementChild,'No internet required');
+					currentRow.insertAdjacentHTML('afterend',config.html.NewUSP('30-second setup'))
+				}
+				else{
+					setText(currentRow.lastElementChild,'Customer support you can actually reach');
+					currentRow.insertAdjacentHTML('afterend',config.html.NewUSP('Works during power outages'))
+				}
+			}
+		}); 
+	}
+    
+    waitUntil(
+        function () {
+            return (
+                document.querySelectorAll(config.selectors.bannerHeading).length > 0 &&
+                document.querySelectorAll(config.selectors.bannerFeatureContainer).length > 0 &&
+                document.querySelectorAll(config.selectors.bannerFeatureZipContainer).length > 0 && 
+                document.querySelectorAll(config.selectors.USP).length > 0
+            );
+        },
+        function () {
+        	document.body.classList.add('CP_93');
+        	CP_93_Banner_ShowCase();
+            CP_93_USP();
+        }
+    );
+})()

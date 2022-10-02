@@ -1,0 +1,13 @@
+https://wiki.optiphoenix.com/index.html     - AB Testing
+
+https://drive.google.com/drive/u/2/folders/1FQPJcRNGT8seSKgxw1h60WV_sMbQGq8B - Knowledge Base
+
+https://drive.google.com/drive/u/2/folders/1SfjcXGOPUv8lmehoix18XqmNpcKYYNX5 - Click Up Training
+
+user javascript and css - extension use to write css and js code for variation of controls.
+
+clickup - tool use to manage my task.
+
+notepad.pw,jsbin,codepen - use to share code.
+
+https://github.com/kamalOptiPhoenix/ABTests - ABTest Repo
